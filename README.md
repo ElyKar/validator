@@ -31,7 +31,11 @@ Given this structure :
 It is possible to validate it in every way imaginable.
 If we want to collect all errors, then calling the following will do the job :
 
-    err := Collect(newIntGreaterThanValidater(config.Age, 0), newIntLowerThan(config.Age, 100), newStringNotEmptyValidater(config.Name), newStringNotEmptyValidater(config.Pet), newHasATurtlePetValidater(config))
+    err := Collect(newIntGreaterThanValidater(config.Age, 0),
+                   newIntLowerThan(config.Age, 100),
+                   newStringNotEmptyValidater(config.Name),
+                   newStringNotEmptyValidater(config.Pet),
+                   newHasATurtlePetValidater(config))
 
 Second Example
 ==============
