@@ -21,16 +21,17 @@ First Example
 =============
 
 Given this structure :
-type Config struct {
-    Age int
-    Name string
-    Pet string
-}
+
+    type Config struct {
+        Age int
+        Name string
+        Pet string
+    }
 
 It is possible to validate it in every way imaginable.
-If we want to collect all errors, then calling :
-err := Collect(newIntGreaterThanValidater(config.Age, 0), newIntLowerThan(config.Age, 100), newStringNotEmptyValidater(config.Name), newStringNotEmptyValidater(config.Pet), newHasATurtlePetValidater(config))
-will do the trick.
+If we want to collect all errors, then calling the following will do the job :
+
+    err := Collect(newIntGreaterThanValidater(config.Age, 0), newIntLowerThan(config.Age, 100), newStringNotEmptyValidater(config.Name), newStringNotEmptyValidater(config.Pet), newHasATurtlePetValidater(config))
 
 Second Example
 ==============
@@ -39,12 +40,13 @@ Now, maybe some validation are necessary to the others.
 Let's say that we want to check if the content of two files is equal, this is were ValidaterSet becomes handy :
 We want to check content of fileA against content of fileB.
 One might write the following :
-filesExists := NewValidaterSet(newDoesFileExist("fileA"), newDoesFileExists("fileB"))
-filesAreReadable := NewValidaterSet(newIsFileReadable("fileA"), newIsFileReadable("fileB"))
-err := Exec(filesExists, filesAreReadable, newAreFileContentEquals("fileA", "fileB"))
-if err != nil {
-    return err
-}
+
+    filesExists := NewValidaterSet(newDoesFileExist("fileA"), newDoesFileExists("fileB"))
+    filesAreReadable := NewValidaterSet(newIsFileReadable("fileA"), newIsFileReadable("fileB"))
+    err := Exec(filesExists, filesAreReadable, newAreFileContentEquals("fileA", "fileB"))
+    if err != nil {
+        return err
+    }
 
 Conclusion
 ==========
